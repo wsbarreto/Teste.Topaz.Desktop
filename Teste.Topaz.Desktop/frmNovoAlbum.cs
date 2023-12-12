@@ -106,6 +106,8 @@ public partial class frmNovoAlbum : Form
         return true;
     }
 
+
+
     private void btnSalvar_Click(object sender, EventArgs e)
     {
         if (IsValid() is false)
