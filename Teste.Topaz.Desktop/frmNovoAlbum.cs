@@ -106,7 +106,14 @@ public partial class frmNovoAlbum : Form
         return true;
     }
 
+    private bool IsRangeValid()
+    {
+        if(string.IsNullOrWhiteSpace(txtTituloMusica.Text)) return false;
+        if(string.IsNullOrWhiteSpace(txtArtista.Text)) return false;
+        if(string.IsNullOrWhiteSpace(txtDuracao.Text)) return false;
 
+        return true;
+    }
 
     private void btnSalvar_Click(object sender, EventArgs e)
     {
