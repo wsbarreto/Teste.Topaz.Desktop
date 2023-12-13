@@ -48,7 +48,7 @@
             // btnAddFaixa
             // 
             btnAddFaixa.BackColor = Color.LightGreen;
-            btnAddFaixa.Location = new Point(488, 73);
+            btnAddFaixa.Location = new Point(487, 121);
             btnAddFaixa.Name = "btnAddFaixa";
             btnAddFaixa.Size = new Size(30, 23);
             btnAddFaixa.TabIndex = 6;
@@ -59,16 +59,18 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(331, 11);
+            label3.BackColor = Color.Transparent;
+            label3.FlatStyle = FlatStyle.System;
+            label3.Location = new Point(330, 59);
             label3.Name = "label3";
             label3.Size = new Size(44, 15);
             label3.TabIndex = 15;
-            label3.Text = "genero";
+            label3.Text = "gênero";
             // 
             // cboGenero
             // 
             cboGenero.FormattingEnabled = true;
-            cboGenero.Location = new Point(331, 29);
+            cboGenero.Location = new Point(330, 77);
             cboGenero.Name = "cboGenero";
             cboGenero.Size = new Size(185, 23);
             cboGenero.TabIndex = 2;
@@ -76,17 +78,19 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 11);
+            label2.BackColor = Color.Transparent;
+            label2.FlatStyle = FlatStyle.System;
+            label2.Location = new Point(11, 59);
             label2.Name = "label2";
             label2.Size = new Size(72, 15);
             label2.TabIndex = 13;
-            label2.Text = "titulo album";
+            label2.Text = "título álbum";
             // 
             // txtTituloAlbum
             // 
             txtTituloAlbum.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtTituloAlbum.AutoCompleteSource = AutoCompleteSource.RecentlyUsedList;
-            txtTituloAlbum.Location = new Point(12, 29);
+            txtTituloAlbum.Location = new Point(11, 77);
             txtTituloAlbum.Name = "txtTituloAlbum";
             txtTituloAlbum.Size = new Size(313, 23);
             txtTituloAlbum.TabIndex = 1;
@@ -94,7 +98,9 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(211, 55);
+            label1.BackColor = Color.Transparent;
+            label1.FlatStyle = FlatStyle.System;
+            label1.Location = new Point(210, 103);
             label1.Name = "label1";
             label1.Size = new Size(39, 15);
             label1.TabIndex = 11;
@@ -104,7 +110,7 @@
             // 
             txtArtista.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtArtista.AutoCompleteSource = AutoCompleteSource.RecentlyUsedList;
-            txtArtista.Location = new Point(211, 73);
+            txtArtista.Location = new Point(210, 121);
             txtArtista.Name = "txtArtista";
             txtArtista.Size = new Size(193, 23);
             txtArtista.TabIndex = 4;
@@ -113,7 +119,7 @@
             // 
             dgvFaixas.AllowUserToAddRows = false;
             dgvFaixas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvFaixas.Location = new Point(12, 102);
+            dgvFaixas.Location = new Point(11, 150);
             dgvFaixas.Name = "dgvFaixas";
             dgvFaixas.RowTemplate.Height = 25;
             dgvFaixas.Size = new Size(506, 150);
@@ -122,17 +128,19 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(12, 55);
+            label4.BackColor = Color.Transparent;
+            label4.FlatStyle = FlatStyle.System;
+            label4.Location = new Point(11, 103);
             label4.Name = "label4";
             label4.Size = new Size(76, 15);
             label4.TabIndex = 19;
-            label4.Text = "titulo musica";
+            label4.Text = "título música";
             // 
             // txtTituloMusica
             // 
             txtTituloMusica.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtTituloMusica.AutoCompleteSource = AutoCompleteSource.RecentlyUsedList;
-            txtTituloMusica.Location = new Point(12, 73);
+            txtTituloMusica.Location = new Point(11, 121);
             txtTituloMusica.Name = "txtTituloMusica";
             txtTituloMusica.Size = new Size(193, 23);
             txtTituloMusica.TabIndex = 3;
@@ -140,15 +148,17 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(410, 55);
+            label5.BackColor = Color.Transparent;
+            label5.FlatStyle = FlatStyle.System;
+            label5.Location = new Point(409, 103);
             label5.Name = "label5";
             label5.Size = new Size(50, 15);
             label5.TabIndex = 21;
-            label5.Text = "duracao";
+            label5.Text = "duração";
             // 
             // txtDuracao
             // 
-            txtDuracao.Location = new Point(410, 73);
+            txtDuracao.Location = new Point(409, 121);
             txtDuracao.Name = "txtDuracao";
             txtDuracao.Size = new Size(72, 23);
             txtDuracao.TabIndex = 5;
@@ -157,22 +167,22 @@
             // btnSalvar
             // 
             btnSalvar.BackColor = Color.LightGreen;
-            btnSalvar.Location = new Point(410, 258);
+            btnSalvar.Image = Properties.Resources.floppy;
+            btnSalvar.Location = new Point(465, 306);
             btnSalvar.Name = "btnSalvar";
-            btnSalvar.Size = new Size(108, 23);
+            btnSalvar.Size = new Size(50, 37);
             btnSalvar.TabIndex = 7;
-            btnSalvar.Text = "&salvar";
             btnSalvar.UseVisualStyleBackColor = false;
             btnSalvar.Click += btnSalvar_Click;
             // 
             // button1
             // 
             button1.BackColor = Color.IndianRed;
-            button1.Location = new Point(12, 258);
+            button1.Image = Properties.Resources.box_arrow_left;
+            button1.Location = new Point(409, 306);
             button1.Name = "button1";
-            button1.Size = new Size(108, 23);
+            button1.Size = new Size(50, 37);
             button1.TabIndex = 22;
-            button1.Text = "&sair";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
@@ -180,7 +190,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(528, 288);
+            ClientSize = new Size(528, 510);
             Controls.Add(button1);
             Controls.Add(btnSalvar);
             Controls.Add(label5);
@@ -197,7 +207,6 @@
             Controls.Add(txtArtista);
             MaximizeBox = false;
             Name = "frmNovoAlbum";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "Novo Album";
             Load += frmNovoAlbum_Load;
             ((System.ComponentModel.ISupportInitialize)dgvFaixas).EndInit();

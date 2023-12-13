@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
+using MetroFramework;
+using MetroFramework.Forms;
 using Teste.Topaz.Desktop.Domain.Entity;
 using Teste.Topaz.Desktop.Domain.Interface.Service;
 using Teste.Topaz.Desktop.DTO;
 
 namespace Teste.Topaz.Desktop;
 
-public partial class frmNovoAlbum : Form
+public partial class frmNovoAlbum : MetroForm
 {
     private readonly ICompactDiscService _discService;
     private readonly IGeneroService _generoService;
@@ -40,13 +42,11 @@ public partial class frmNovoAlbum : Form
             var listaGenerosEntity = await this._generoService.GetAllAsync();
             var listaGenerosDto = GeneroDTO.ConvertListEntityToListDto(_mapper, listaGenerosEntity.ToList());
 
-            cboGenero.DataSource = listaGenerosDto;
-            cboGenero.DisplayMember = "NOME";
-            cboGenero.ValueMember = "ID";
+            cboGenero.ConfigureComboBox(listaGenerosDto, "NOME", "ID");
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            ex.ErrorShowMessagem(this);
             throw ex;
         }
     }
@@ -63,11 +63,11 @@ public partial class frmNovoAlbum : Form
 
         this.listaDiscoDTO.Add(new CompactDiscDTO { TB_FAIXA_ID = faixa.ID, TB_GENERO_ID = Genero.ID, TITULO = txtTituloAlbum.Text });
 
-        dgvFaixas.DataSource = null;
-        dgvFaixas.DataSource = listaFaixa;
+        var dicColumns = new Dictionary<string, bool>();
+        dicColumns.Add("ID", true);
+        dicColumns.Add("DATA_CADASTRO", false);
 
-        dgvFaixas.Columns["ID"].Visible = false;
-        dgvFaixas.Columns["DATA_CADASTRO"].Visible = false;
+        dgvFaixas.ConfigureDataGridView(listaFaixa, dicColumns);
         dgvFaixas.Refresh();
 
         LimpaCampos();
@@ -108,9 +108,9 @@ public partial class frmNovoAlbum : Form
 
     private bool IsRangeValid()
     {
-        if(string.IsNullOrWhiteSpace(txtTituloMusica.Text)) return false;
-        if(string.IsNullOrWhiteSpace(txtArtista.Text)) return false;
-        if(string.IsNullOrWhiteSpace(txtDuracao.Text)) return false;
+        if (string.IsNullOrWhiteSpace(txtTituloMusica.Text)) return false;
+        if (string.IsNullOrWhiteSpace(txtArtista.Text)) return false;
+        if (string.IsNullOrWhiteSpace(txtDuracao.Text)) return false;
 
         return true;
     }
@@ -119,7 +119,7 @@ public partial class frmNovoAlbum : Form
     {
         if (IsValid() is false)
         {
-            MessageBox.Show("preencha todos os campos obrigatorios", "alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MetroMessageBox.Show(this, "preencha todos os campos obrigatorios", "alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
 
@@ -133,11 +133,11 @@ public partial class frmNovoAlbum : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            ex.ErrorShowMessagem(this);
             throw ex;
         }
 
-        MessageBox.Show("cd cadastrado com sucesso", "sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MetroMessageBox.Show(this, "cd cadastrado com sucesso", "sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     private void button1_Click(object sender, EventArgs e)

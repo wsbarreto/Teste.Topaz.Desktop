@@ -46,7 +46,7 @@
             // 
             dgvDiscos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvDiscos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDiscos.Location = new Point(12, 134);
+            dgvDiscos.Location = new Point(12, 192);
             dgvDiscos.Name = "dgvDiscos";
             dgvDiscos.RowTemplate.Height = 25;
             dgvDiscos.Size = new Size(516, 258);
@@ -54,26 +54,29 @@
             // 
             // txtArtista
             // 
-            txtArtista.Location = new Point(12, 62);
+            txtArtista.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtArtista.Location = new Point(12, 119);
             txtArtista.Name = "txtArtista";
+            txtArtista.PlaceholderText = "digite o nome do artista";
             txtArtista.Size = new Size(317, 23);
             txtArtista.TabIndex = 1;
             // 
             // button1
             // 
-            button1.BackColor = Color.LightBlue;
-            button1.Location = new Point(12, 10);
+            button1.BackColor = Color.Transparent;
+            button1.Image = Properties.Resources.plus_circle;
+            button1.Location = new Point(12, 67);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(39, 31);
             button1.TabIndex = 2;
-            button1.Text = "&novo";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 44);
+            label1.FlatStyle = FlatStyle.System;
+            label1.Location = new Point(12, 101);
             label1.Name = "label1";
             label1.Size = new Size(39, 15);
             label1.TabIndex = 3;
@@ -82,7 +85,8 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 87);
+            label2.FlatStyle = FlatStyle.System;
+            label2.Location = new Point(12, 144);
             label2.Name = "label2";
             label2.Size = new Size(72, 15);
             label2.TabIndex = 5;
@@ -90,16 +94,17 @@
             // 
             // txtTituloAlbum
             // 
-            txtTituloAlbum.Location = new Point(12, 105);
+            txtTituloAlbum.Location = new Point(12, 162);
             txtTituloAlbum.Name = "txtTituloAlbum";
-            txtTituloAlbum.Size = new Size(224, 23);
+            txtTituloAlbum.PlaceholderText = "digite o título do album";
+            txtTituloAlbum.Size = new Size(253, 23);
             txtTituloAlbum.TabIndex = 4;
             // 
             // cboGenero
             // 
             cboGenero.DropDownStyle = ComboBoxStyle.DropDownList;
             cboGenero.FormattingEnabled = true;
-            cboGenero.Location = new Point(335, 62);
+            cboGenero.Location = new Point(335, 119);
             cboGenero.Name = "cboGenero";
             cboGenero.Size = new Size(193, 23);
             cboGenero.TabIndex = 6;
@@ -107,7 +112,8 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(335, 44);
+            label3.FlatStyle = FlatStyle.System;
+            label3.Location = new Point(335, 101);
             label3.Name = "label3";
             label3.Size = new Size(44, 15);
             label3.TabIndex = 7;
@@ -115,18 +121,21 @@
             // 
             // button2
             // 
-            button2.Location = new Point(453, 105);
+            button2.BackColor = Color.Transparent;
+            button2.Image = Properties.Resources.search;
+            button2.Location = new Point(482, 162);
             button2.Name = "button2";
-            button2.Size = new Size(75, 23);
+            button2.Size = new Size(46, 23);
             button2.TabIndex = 8;
-            button2.Text = "&buscar";
-            button2.UseVisualStyleBackColor = true;
+            button2.TextAlign = ContentAlignment.BottomCenter;
+            button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(242, 87);
+            label4.FlatStyle = FlatStyle.System;
+            label4.Location = new Point(271, 145);
             label4.Name = "label4";
             label4.Size = new Size(63, 15);
             label4.TabIndex = 10;
@@ -134,8 +143,9 @@
             // 
             // txtNomeFaixa
             // 
-            txtNomeFaixa.Location = new Point(242, 105);
+            txtNomeFaixa.Location = new Point(271, 163);
             txtNomeFaixa.Name = "txtNomeFaixa";
+            txtNomeFaixa.PlaceholderText = "digite o título da faixa";
             txtNomeFaixa.Size = new Size(205, 23);
             txtNomeFaixa.TabIndex = 9;
             // 
@@ -143,7 +153,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(540, 404);
+            ClientSize = new Size(540, 463);
             Controls.Add(label4);
             Controls.Add(txtNomeFaixa);
             Controls.Add(button2);
@@ -156,8 +166,7 @@
             Controls.Add(txtArtista);
             Controls.Add(dgvDiscos);
             Name = "frmListaAlbum";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "lista";
+            Text = "lista de discos";
             Load += frmListaAlbum_Load;
             ((System.ComponentModel.ISupportInitialize)dgvDiscos).EndInit();
             ResumeLayout(false);

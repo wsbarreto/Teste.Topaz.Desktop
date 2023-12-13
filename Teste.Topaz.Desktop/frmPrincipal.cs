@@ -1,12 +1,12 @@
 using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
-using System.Text.Json;
 using Teste.Topaz.Desktop.Domain.Interface.Service;
 using Teste.Topaz.Desktop.DTO;
+using MetroFramework.Forms;
+using MetroFramework;
 
 namespace Teste.Topaz.Desktop
 {
-    public partial class frmListaAlbum : Form
+    public partial class frmListaAlbum : MetroForm
     {
         private readonly ICompactDiscService _discService;
         private readonly IGeneroService _generoService;
@@ -79,15 +79,11 @@ namespace Teste.Topaz.Desktop
 
                 listaGenerosDto.Add(new GeneroDTO { NOME = string.Empty });
 
-                cboGenero.DataSource = listaGenerosDto;
-                cboGenero.DisplayMember = "NOME";
-                cboGenero.ValueMember = "ID";
-
-                cboGenero.SelectedIndex = cboGenero.Items.Count - 1;
+                cboGenero.ConfigureComboBox(listaGenerosDto, "NOME", "ID");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ex.ErrorShowMessagem(this);
                 throw ex;
             }
         }
@@ -96,35 +92,20 @@ namespace Teste.Topaz.Desktop
         {
             var listaDiscoDTO = await _discService.GetAllDiscDapperAsync();
 
-            dgvDiscos.DataSource = listaDiscoDTO;
-            dgvDiscos.Columns["ID"].Visible = false;
-            dgvDiscos.Columns["MUSICA"].Visible = false;
-            dgvDiscos.Columns["ARTISTA"].Visible = false;
-            dgvDiscos.Columns["DURACAO"].Visible = false;
+            var dicColumns = new Dictionary<string, bool>();
+            dicColumns.Add("ID", false);
+            dicColumns.Add("MUSICA", false);
+            dicColumns.Add("ARTISTA", false);
+            dicColumns.Add("DURACAO", false);
+
+            dgvDiscos.ConfigureDataGridView(listaDiscoDTO, dicColumns);
         }
 
         private void AdicionarColuna()
         {
-            var colunaTitulo = new DataGridViewTextBoxColumn();
-            colunaTitulo.HeaderText = "titulo album";
-            colunaTitulo.Name = "TituloAlbum";
-            colunaTitulo.DataPropertyName = "TITULO";
-
-            dgvDiscos.Columns.Add(colunaTitulo);
-
-            var colunaGenero = new DataGridViewTextBoxColumn();
-            colunaGenero.HeaderText = "genero";
-            colunaGenero.Name = "Genero";
-            colunaGenero.DataPropertyName = "GENERO";
-
-            dgvDiscos.Columns.Add(colunaGenero);
-
-            var colunaData = new DataGridViewTextBoxColumn();
-            colunaData.HeaderText = "cadastro";
-            colunaData.Name = "DataCadastro";
-            colunaData.DataPropertyName = "DATA";
-
-            dgvDiscos.Columns.Add(colunaData);
+            dgvDiscos.AddColumnDataGridView("título álbum", "TituloAlbum", "TITULO");
+            dgvDiscos.AddColumnDataGridView("gênero", "Genero", "GENERO");
+            dgvDiscos.AddColumnDataGridView("cadastro", "DataCadastro", "DATA");
         }
 
         #endregion

@@ -1,8 +1,9 @@
-﻿using Teste.Topaz.Desktop.DTO;
+﻿using MetroFramework.Forms;
+using Teste.Topaz.Desktop.DTO;
 
 namespace Teste.Topaz.Desktop;
 
-public partial class frmDetalhe : Form
+public partial class frmDetalhe : MetroForm
 {
     private readonly List<DiscoDTO> _listaDicoDto;
 
