@@ -83,6 +83,26 @@ namespace Teste.Topaz.Desktop.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ico_teste {
+            get {
+                object obj = ResourceManager.GetObject("ico-teste", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ico_teste1 {
+            get {
+                object obj = ResourceManager.GetObject("ico-teste1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap plus_circle {
             get {
                 object obj = ResourceManager.GetObject("plus-circle", resourceCulture);
@@ -97,6 +117,26 @@ namespace Teste.Topaz.Desktop.Properties {
             get {
                 object obj = ResourceManager.GetObject("plus-circle1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Byte[].
+        /// </summary>
+        internal static byte[] Roboto_Medium {
+            get {
+                object obj = ResourceManager.GetObject("Roboto-Medium", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Byte[].
+        /// </summary>
+        internal static byte[] Roboto_Regular {
+            get {
+                object obj = ResourceManager.GetObject("Roboto-Regular", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

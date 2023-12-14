@@ -30,7 +30,7 @@ internal static class Program
         var faixaService = serviceProvider.GetService<IFaixaService>();
 
         ApplicationConfiguration.Initialize();
-        Application.Run(new frmListaAlbum(discService, generoService, faixaService, mapper));
+        Application.Run(new frmMain2(discService, generoService, faixaService, mapper));
     }
 
     public static void ConfigureService(IServiceCollection serviceCollection)

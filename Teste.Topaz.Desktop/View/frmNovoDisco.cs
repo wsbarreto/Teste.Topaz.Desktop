@@ -1,0 +1,155 @@
+﻿using AutoMapper;
+using MetroFramework;
+using System.Data;
+using Teste.Topaz.Desktop.Domain.Entity;
+using Teste.Topaz.Desktop.Domain.Interface.Service;
+using Teste.Topaz.Desktop.DTO;
+
+namespace Teste.Topaz.Desktop.View;
+
+public partial class frmNovoDisco : UserControl
+{
+    private readonly ICompactDiscService _discService;
+    private readonly IGeneroService _generoService;
+    private readonly IFaixaService _faixaService;
+    private readonly IMapper _mapper;
+    private readonly List<FaixaDTO> listaFaixa;
+    private readonly List<CompactDiscDTO> listaDiscoDTO;
+    private GeneroDTO Genero;
+
+    public readonly string TituloFormulario = "criar novo disco";
+
+    public frmNovoDisco(ICompactDiscService discService, IFaixaService faixaService, IGeneroService generoService, IMapper mapper, ref Label subTitulo)
+    {
+        InitializeComponent();
+
+        this._discService = discService ?? throw new ArgumentNullException(nameof(ICompactDiscService));
+        this._generoService = generoService ?? throw new ArgumentNullException(nameof(IGeneroService));
+        this._faixaService = faixaService ?? throw new ArgumentNullException(nameof(IFaixaService));
+        this._mapper = mapper ?? throw new ArgumentNullException(nameof(IMapper));
+
+        this.listaFaixa = new List<FaixaDTO>();
+        this.listaDiscoDTO = new List<CompactDiscDTO>();
+
+        subTitulo.Text = TituloFormulario;
+    }
+
+    private async Task CarregaGenero()
+    {
+        try
+        {
+            var listaGenerosEntity = await this._generoService.GetAllAsync();
+            var listaGenerosDto = GeneroDTO.ConvertListEntityToListDto(_mapper, listaGenerosEntity.ToList());
+
+            cboGenero.ConfigureRJComboBox(listaGenerosDto, "NOME", "ID");
+        }
+        catch (Exception ex)
+        {
+            ex.ErrorShowMessagem(this);
+            throw ex;
+        }
+    }
+
+    private void btnAddFaixa_Click(object sender, EventArgs e)
+    {
+        Genero = cboGenero.SelectedItem as GeneroDTO;
+
+        AlteraGenero();
+        AlteraTituloAlbum();
+
+        var faixa = new FaixaDTO { ARTISTA = txtArtista.Text, DURACAO = decimal.Parse(txtDuracao.Text), TITULO = txtTituloMusica.Text };
+        this.listaFaixa.Add(faixa);
+
+        this.listaDiscoDTO.Add(new CompactDiscDTO { TB_FAIXA_ID = faixa.ID, TB_GENERO_ID = Genero.ID, TITULO = txtTituloAlbum.Text });
+
+        var dicColumns = new Dictionary<string, bool>();
+        dicColumns.Add("ID", true);
+        dicColumns.Add("DATA_CADASTRO", false);
+
+        dgvFaixas.ConfigureDataGridView(listaFaixa, dicColumns);
+        dgvFaixas.Refresh();
+
+        LimpaCampos();
+    }
+
+    private void frmNovoDisco_Load(object sender, EventArgs e)
+    {
+        CarregaGenero();
+    }
+
+    private void AlteraGenero()
+    {
+        listaDiscoDTO.Where(w => w.TB_GENERO_ID != Genero.ID).ToList().ForEach((item) =>
+        {
+            item.TB_GENERO_ID = Genero.ID;
+        });
+    }
+
+    private void AlteraTituloAlbum()
+    {
+        listaDiscoDTO.Where(w => w.TITULO != txtTituloAlbum.Text).ToList().ForEach((item) =>
+        {
+            item.TITULO = txtTituloAlbum.Text;
+        });
+    }
+
+    private void LimpaCampos()
+    {
+        txtArtista.Text = string.Empty;
+        txtDuracao.Text = string.Empty;
+        txtTituloMusica.Text = string.Empty;
+        txtTituloMusica.Focus();
+    }
+
+    private bool IsValid()
+    {
+        if (string.IsNullOrWhiteSpace(txtTituloAlbum.Text)) return false;
+        if (cboGenero.SelectedIndex < 0) return false;
+        if (dgvFaixas.Rows.Count <= 0) return false;
+
+        return true;
+    }
+
+    private bool IsRangeValid()
+    {
+        if (string.IsNullOrWhiteSpace(txtTituloMusica.Text)) return false;
+        if (string.IsNullOrWhiteSpace(txtArtista.Text)) return false;
+        if (string.IsNullOrWhiteSpace(txtDuracao.Text)) return false;
+
+        return true;
+    }
+
+    private void txtDuracao_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyValue.Equals(13))
+            btnAddFaixa_Click(sender, e);
+    }
+
+    private void btnSalvar_Click(object sender, EventArgs e)
+    {
+        if (IsValid() is false)
+        {
+            MetroMessageBox.Show(this, "preencha todos os campos obrigatorios", "alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        try
+        {
+            var listaFaixaEntity = _mapper.Map<List<FaixaEntity>>(listaFaixa);
+            var listaDiscoEntity = _mapper.Map<List<CompactDiscEntity>>(listaDiscoDTO);
+
+            this._faixaService.InserirListAsync(listaFaixaEntity);
+            this._discService.InserirListaAsync(listaDiscoEntity);
+        }
+        catch (Exception ex)
+        {
+            ex.ErrorShowMessagem(this);
+            throw ex;
+        }
+
+        MetroMessageBox.Show(this, "cd cadastrado com sucesso", "sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        if (MetroMessageBox.Show(this, "deseja cadastrar outro disco?", "sucesso", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+            btnSalvar.Enabled = false;
+    }
+}

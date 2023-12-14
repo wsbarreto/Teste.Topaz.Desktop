@@ -41,18 +41,18 @@
             label5 = new Label();
             txtDuracao = new TextBox();
             btnSalvar = new Button();
-            button1 = new Button();
+            btnVoltar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvFaixas).BeginInit();
             SuspendLayout();
             // 
             // btnAddFaixa
             // 
-            btnAddFaixa.BackColor = Color.LightGreen;
+            btnAddFaixa.BackColor = Color.Transparent;
+            btnAddFaixa.Image = Properties.Resources.plus_circle;
             btnAddFaixa.Location = new Point(487, 121);
             btnAddFaixa.Name = "btnAddFaixa";
-            btnAddFaixa.Size = new Size(30, 23);
+            btnAddFaixa.Size = new Size(30, 25);
             btnAddFaixa.TabIndex = 6;
-            btnAddFaixa.Text = "&+";
             btnAddFaixa.UseVisualStyleBackColor = false;
             btnAddFaixa.Click += btnAddFaixa_Click;
             // 
@@ -69,6 +69,7 @@
             // 
             // cboGenero
             // 
+            cboGenero.DropDownStyle = ComboBoxStyle.DropDownList;
             cboGenero.FormattingEnabled = true;
             cboGenero.Location = new Point(330, 77);
             cboGenero.Name = "cboGenero";
@@ -119,7 +120,7 @@
             // 
             dgvFaixas.AllowUserToAddRows = false;
             dgvFaixas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvFaixas.Location = new Point(11, 150);
+            dgvFaixas.Location = new Point(11, 161);
             dgvFaixas.Name = "dgvFaixas";
             dgvFaixas.RowTemplate.Height = 25;
             dgvFaixas.Size = new Size(506, 150);
@@ -168,30 +169,30 @@
             // 
             btnSalvar.BackColor = Color.LightGreen;
             btnSalvar.Image = Properties.Resources.floppy;
-            btnSalvar.Location = new Point(465, 306);
+            btnSalvar.Location = new Point(465, 317);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(50, 37);
             btnSalvar.TabIndex = 7;
             btnSalvar.UseVisualStyleBackColor = false;
             btnSalvar.Click += btnSalvar_Click;
             // 
-            // button1
+            // btnVoltar
             // 
-            button1.BackColor = Color.IndianRed;
-            button1.Image = Properties.Resources.box_arrow_left;
-            button1.Location = new Point(409, 306);
-            button1.Name = "button1";
-            button1.Size = new Size(50, 37);
-            button1.TabIndex = 22;
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            btnVoltar.BackColor = Color.IndianRed;
+            btnVoltar.Image = Properties.Resources.box_arrow_left;
+            btnVoltar.Location = new Point(409, 317);
+            btnVoltar.Name = "btnVoltar";
+            btnVoltar.Size = new Size(50, 37);
+            btnVoltar.TabIndex = 22;
+            btnVoltar.UseVisualStyleBackColor = false;
+            btnVoltar.Click += button1_Click;
             // 
             // frmNovoAlbum
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(528, 510);
-            Controls.Add(button1);
+            ClientSize = new Size(528, 363);
+            Controls.Add(btnVoltar);
             Controls.Add(btnSalvar);
             Controls.Add(label5);
             Controls.Add(txtDuracao);
@@ -207,7 +208,7 @@
             Controls.Add(txtArtista);
             MaximizeBox = false;
             Name = "frmNovoAlbum";
-            Text = "Novo Album";
+            Text = "novo álbum";
             Load += frmNovoAlbum_Load;
             ((System.ComponentModel.ISupportInitialize)dgvFaixas).EndInit();
             ResumeLayout(false);
@@ -229,6 +230,6 @@
         private Label label5;
         private TextBox txtDuracao;
         private Button btnSalvar;
-        private Button button1;
+        private Button btnVoltar;
     }
 }

@@ -1,19 +1,18 @@
 using AutoMapper;
+using MetroFramework.Forms;
 using Teste.Topaz.Desktop.Domain.Interface.Service;
 using Teste.Topaz.Desktop.DTO;
-using MetroFramework.Forms;
-using MetroFramework;
 
 namespace Teste.Topaz.Desktop
 {
-    public partial class frmListaAlbum : MetroForm
+    public partial class frmListaAlbum : Form
     {
         private readonly ICompactDiscService _discService;
         private readonly IGeneroService _generoService;
         private readonly IFaixaService _faixaService;
         private readonly IMapper _mapper;
 
-        public frmListaAlbum(ICompactDiscService discService, IGeneroService generoService, IFaixaService faixaService, IMapper mapper) : base()
+        public frmListaAlbum(ICompactDiscService discService, IFaixaService faixaService, IGeneroService generoService, IMapper mapper) : base()
         {
             InitializeComponent();
             _discService = discService;
